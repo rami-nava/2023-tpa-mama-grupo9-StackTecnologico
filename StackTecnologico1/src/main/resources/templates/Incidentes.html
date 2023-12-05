@@ -21,9 +21,27 @@
             <div class="row row-cols-1 row-cols-md-2 g-4">
                 <div class="col" th:each = "incidente : ${listadoIncidentes}">
                     <div class="tarjetaIncidente">
+                        <div class="contenedorCirculo">
+                            <div class="circulo">
+                                <img th:if="${incidente.getServicio().esBanio()}" src="/./images/banioLogo.jpeg" alt="banioLogo" id="banioLogo" width="100" height="100">
+                                <img th:unless="${incidente.getServicio().esBanio()}" src="/./images/elevacionLogo.jpeg" alt="elevacionLogo" id="elevacionLogo" width="100" height="100">
+                            </div>
+                        </div>
                         <ul class="list-group list-group-flush">
-                            <li class="list-group-item" th:text="${incidente.establecimiento.tipo} + ': ' + ${incidente.establecimiento.nombre}"></li>
-                            <li class="list-group-item" th:text="${incidente.servicio.nombre} + ': ' + ${incidente.servicio.tipoNombre}"></li>
+                            <li class="list-group-item">
+                                <span class="highlight" th:text="${incidente.establecimiento.tipo} + ': '"></span>
+                                <span th:text="${incidente.establecimiento.nombre}"></span></li>
+                            <li class="list-group-item">
+                                <span class="highlight" th:text="${incidente.servicio.nombre} + ': '"></span>
+                                <span th:text="${incidente.servicio.tipoNombre}"></span></li>
+                            <li class="list-group-item">
+                                <span class="highlight2">Tiempo abierto: </span>
+                                <span class="highlight3" th:text="${incidente.tiempoAbierto()}"></span>
+                            </li>
+                            <li class="list-group-item">
+                                <span class="highlight2">Cantidad de veces reportado: </span>
+                                <span class="highlight3" th:text="${incidente.getReportesDeApertura().size()}"></span>
+                            </li>
                             <li class="list-group-item">
                                 <span th:if="${incidente.cerrado()}" class="badge text-bg-danger">CERRADO</span>
                                 <span th:unless="${incidente.cerrado()}" class="badge text-bg-success">ABIERTO</span>

@@ -8,6 +8,9 @@ import models.domain.Servicios.Servicio;
 import models.persistence.Persistente;
 
 import jakarta.persistence.*;
+
+import java.time.Duration;
+import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
@@ -116,5 +119,22 @@ public class Incidente extends Persistente {
   public boolean fueCerradoPor(MiembroDeComunidad miembroDeComunidad) {
       return !reportes.stream().filter(reporteDeIncidente -> reporteDeIncidente.esDeCierre() && reporteDeIncidente.getDenunciante().equals(miembroDeComunidad)).toList().isEmpty();
   }
+
+    public String tiempoAbierto() {
+        Duration tiempoPasado;
+        if(this.cerrado())
+        {
+            tiempoPasado = Duration.between(this.primeraApertura().getFechaYhora(), this.primerCierre().getFechaYhora());
+        }else{
+            tiempoPasado = Duration.between(this.primeraApertura().getFechaYhora(), LocalDateTime.now());
+        }
+        long dias = tiempoPasado.toDays();
+        long horas = tiempoPasado.toHours() % 24;
+        long minutos = tiempoPasado.toMinutes() % 60;
+        if (dias != 1) {
+            return dias + " dias " + horas + " horas " + minutos + " minutos";
+        } else
+            return dias + " dia " + horas + " horas " + minutos + " minutos";
+    }
 
 }
