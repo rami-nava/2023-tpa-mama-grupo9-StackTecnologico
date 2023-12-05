@@ -4,7 +4,6 @@ import lombok.Getter;
 import lombok.Setter;
 import models.domain.Incidentes.Incidente;
 import models.domain.Incidentes.ReporteDeIncidente;
-import models.domain.Notificaciones.EmisorDeNotificaciones;
 import models.persistence.Persistente;
 import models.persistence.Repositorios.RepositorioComunidad;
 import models.persistence.Repositorios.RepositorioDeIncidentes;
@@ -27,8 +26,6 @@ public class Comunidad extends Persistente {
     @OneToMany(cascade = {CascadeType.MERGE,CascadeType.REMOVE})
     @JoinColumn(name = "comunidad_id")
     private List<ReporteDeIncidente> reportesDeLaComunidad;
-    @Transient
-    private EmisorDeNotificaciones emisorDeNotificaciones;
     @Transient
     private RepositorioComunidad repositorioComunidad;
     @Transient
