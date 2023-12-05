@@ -26,16 +26,10 @@ public class Comunidad extends Persistente {
     @OneToMany(cascade = {CascadeType.MERGE,CascadeType.REMOVE})
     @JoinColumn(name = "comunidad_id")
     private List<ReporteDeIncidente> reportesDeLaComunidad;
-    @Transient
-    private RepositorioComunidad repositorioComunidad;
-    @Transient
-    private RepositorioDeIncidentes repositorioDeIncidentes;
 
     public Comunidad() {
         this.miembros = new ArrayList<>();
         this.reportesDeLaComunidad = new ArrayList<>();
-        //this.repositorioComunidad = RepositorioComunidad.getInstancia();
-        //this.repositorioDeIncidentes = RepositorioDeIncidentes.getInstancia();
     }
     public void agregarMiembro(MiembroDeComunidad unMiembro) {
         this.miembros.add(unMiembro);
