@@ -49,8 +49,6 @@ public class MiembroDeComunidad extends Persistente {
     private List<Comunidad> comunidades;
     @OneToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REMOVE})
     private ReceptorDeNotificaciones receptorDeNotificaciones;
-    @Transient
-    private RepositorioDeReportesDeIncidentes repositorioDeReportesDeIncidentes;
 
     public MiembroDeComunidad() {
         this.provincias = new ArrayList<>();
@@ -59,7 +57,6 @@ public class MiembroDeComunidad extends Persistente {
         this.serviciosDeInteres = new ArrayList<>();
         this.comunidades = new ArrayList<>();
         this.receptorDeNotificaciones = new ReceptorDeNotificaciones(); //para que se persiste automaticamente
-       // this.repositorioDeReportesDeIncidentes = RepositorioDeReportesDeIncidentes.getInstancia();
     }
 
     public void agregarProvincia(Provincia provincia) {
